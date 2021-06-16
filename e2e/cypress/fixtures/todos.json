@@ -1,0 +1,22 @@
+[
+  {
+      "id": 1,
+      "name": "Cypress e2e test",
+      "expectedLength": 1
+  },
+  {
+      "id": 2,
+      "name": "Jest unit test",
+      "expectedLength": 2
+  },
+  {
+      "id": 3,
+      "name": "API calls",
+      "expectedLength": 3
+  },
+  {
+      "id": 4,
+      "name": "GitHub Actions",
+      "expectedLength": 4
+  }
+]

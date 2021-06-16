@@ -1,13 +1,19 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create the custom commands: 'createDefaultTodos'
-// and 'createTodo'.
-//
-// The commands.js file is a great place to
-// modify existing commands and create custom
-// commands for use throughout your tests.
-//
-// You can read more about custom commands here:
-// https://on.cypress.io/commands
-// ***********************************************
+Cypress.Commands.add('createTodos', (data = 'todos') => {
+    cy.fixture(data)
+        .each(todo => {
+            cy.get('.new-todo')
+                .type(todo.name)
+                .type('{enter}')
+        })
+})
 
+Cypress.Commands.add('completeFirstTodo', (data = 'todos') => {
+    cy.fixture(data)
+    cy.get('.todo-list li')
+        .first()
+        .as('first-todo')
+
+    cy.get('@first-todo')
+        .find('.toggle')
+        .click()
+})
