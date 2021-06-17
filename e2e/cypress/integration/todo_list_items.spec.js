@@ -1,6 +1,6 @@
 describe('Todo list actions', () => {
     const TODO_LIST = '.todo-list li'
-    
+
     beforeEach(() => {
         cy.visit('/')
         cy.createTodos()
