@@ -1,6 +1,6 @@
 
 const fetch = require('node-fetch');
-const planetsEndpoint = 'https://swapi.dev/api/planets'
+global.planetsEndpoint = 'https://swapi.dev/api/planets'
 
 
 const getAllPlanets = async () => {

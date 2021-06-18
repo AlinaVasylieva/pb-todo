@@ -1,6 +1,6 @@
 const { default: fetch } = require('node-fetch')
 const { getAllPlanets, getPlanet, getPlanetByName } = require('../sw-client')
-//const {allPlanetsMock} = require('./allPlanetsMock.json') //TBD use json files for mocking
+//const {allPlanetsMock} = require('./allPlanetsMock.json') //TBD try to use json files for mocking
 const apiErrorMessageMock = 'API Failure'
 const notFoundMessageMock = 'Not found'
 const mockResponseAllPlanets = {
@@ -76,7 +76,7 @@ describe("Get planet(s) SWAPI", () => {
       JSON.stringify(mockResponseAllPlanets)
     );
     const response = await getAllPlanets();
-    expect(fetch).toHaveBeenCalledWith(`https://swapi.dev/api/planets`, {
+    expect(fetch).toHaveBeenCalledWith(planetsEndpoint, {
       method: "GET"
     });
     expect(fetch).toHaveBeenCalledTimes(1);
@@ -102,7 +102,7 @@ describe("Get planet(s) SWAPI", () => {
       JSON.stringify(planetById)
     );
     const response = await getPlanet(planetId);
-    expect(fetch).toHaveBeenCalledWith(`https://swapi.dev/api/planets/${planetId}`, {
+    expect(fetch).toHaveBeenCalledWith(planetsEndpoint + '/' + planetId, {
       method: "GET"
     });
     expect(fetch).toHaveBeenCalledTimes(1);
@@ -134,7 +134,7 @@ describe("Get planet(s) SWAPI", () => {
     );
     const expectedPlanet = mockResponseAllPlanets.results[1].name
     const response = await getPlanetByName(expectedPlanet);
-    expect(fetch).toHaveBeenCalledWith(`https://swapi.dev/api/planets`, {
+    expect(fetch).toHaveBeenCalledWith(planetsEndpoint, {
       method: "GET"
     });
     expect(fetch).toHaveBeenCalledTimes(1);
@@ -147,9 +147,6 @@ describe("Get planet(s) SWAPI", () => {
     );
     const planetParameter = mockResponseAllPlanets.results[1].name + 'test'
     const response = await getPlanetByName(planetParameter);
-    expect(fetch).toHaveBeenCalledWith(`https://swapi.dev/api/planets`, {
-      method: "GET"
-    });
     expect(response).toBe(`Failed to find planet: ${planetParameter}`)
   })
 
