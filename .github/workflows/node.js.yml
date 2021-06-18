@@ -10,20 +10,17 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-
+  test:
+    name: Run unit tests
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
+    - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: ./
+      uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: cd unit
-    - run: npm install
-    - run: npm test
+    - name: Install
+      run: npm install
+    - name: Test
+      run: npm test
