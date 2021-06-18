@@ -1,15 +1,19 @@
+const { default: fetch } = require('node-fetch')
 const { getAllPlanets, getPlanet, getPlanetByName } = require('./sw-client')
 
 
 test('Get all planets successfully', async () => {
+    fetch.mockResponseOnce(JSON.stringify({planets: {count: 60}}));
+    const expectedTotalNumberOfPlanets = 60
     const response = await getAllPlanets()
-    expect(response.count).toBe(60)
+    expect(response).toEqual(60)
+    expect(response.count).toBe(expectedTotalNumberOfPlanets)
 })
 
 test('Get planet by correct id successfully', async () => {
-    const call = {id: 3, name: 'Yavin IV'}
-    const response = await getPlanet(call.id)
-    expect(response.name).toBe(call.name)
+    const planet = {id: 3, name: 'Yavin IV'}
+    const response = await getPlanet(planet.id)
+    expect(response.name).toBe(planet.name)
 })
 
 test('Empty response get planet by incorrect id', async () => {
